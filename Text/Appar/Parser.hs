@@ -46,6 +46,7 @@ instance Monad (MkParser inp) where
     p >>= f  = P $ \bs -> case runParser p bs of
         (Nothing, bs') -> (Nothing, bs')
         (Just a,  bs') -> runParser (f a) bs'
+    fail _   = P $ \bs -> (Nothing, bs)
 
 instance MonadPlus (MkParser inp) where
     mzero       = P $ \bs -> (Nothing, bs)
@@ -91,6 +92,12 @@ noneOf cs = satisfy (not . (`elem` cs))
 alphaNum :: Input inp => MkParser inp Char
 alphaNum = satisfy isAlphaNum
 
+digit :: Input inp => MkParser inp Char
+digit = satisfy isDigit
+
+hexDigit :: Input inp => MkParser inp Char
+hexDigit = satisfy isHexDigit
+
 space :: Input inp => MkParser inp Char
 space = satisfy isSpace
 
@@ -100,7 +107,7 @@ choice :: [MkParser inp a] -> MkParser inp a
 choice = foldr (<|>) mzero
 
 option :: a -> MkParser inp a -> MkParser inp a
-option x p = p <|> return x
+option x p = p <|> pure x
 
 skipMany :: MkParser inp a -> MkParser inp ()
 skipMany p = () <$ many p
@@ -110,3 +117,8 @@ skipSome p = () <$ some p
 
 sepBy1 :: MkParser inp a -> MkParser inp b -> MkParser inp [a]
 sepBy1 p sep = (:) <$> p <*> many (sep *> p)
+
+manyTill :: MkParser inp a -> MkParser inp b -> MkParser inp [a]
+manyTill p end = scan
+  where
+    scan = [] <$ end <|> (:) <$> p <*> scan
