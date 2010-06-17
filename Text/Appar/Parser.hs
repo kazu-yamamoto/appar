@@ -87,7 +87,7 @@ oneOf :: Input inp => String -> MkParser inp Char
 oneOf cs = satisfy (`elem` cs)
 
 noneOf :: Input inp => String -> MkParser inp Char
-noneOf cs = satisfy (not . (`elem` cs))
+noneOf cs = satisfy (`notElem` cs)
 
 alphaNum :: Input inp => MkParser inp Char
 alphaNum = satisfy isAlphaNum
