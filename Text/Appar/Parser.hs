@@ -1,9 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 {-
-  Parser whose input is ByteString and output is NOT ByteString.
-  This is subset of Parsec and is implemented because Haskell
-  Platform includes Parsec 2, not Parsec 3, sigh.
+This is subset of Parsec.
+
+Parsec 3 provides features which Parsec 2 does not provide:
+- Applicative style
+- ByteString as input
+
+But Haskell Platform includes Parsec 2, not Parsec 3. Installing
+Parsec 3 to Haskell Platform environment makes it mess. So, I have
+implemented this.
 -}
 
 module Text.Appar.Parser where
