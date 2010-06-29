@@ -89,6 +89,9 @@ string (c:cs) = (:) <$> char c <*> string cs
 
 ----------------------------------------------------------------
 
+anyChar :: Input inp => MkParser inp Char
+anyChar = satisfy (const True)
+
 oneOf :: Input inp => String -> MkParser inp Char
 oneOf cs = satisfy (`elem` cs)
 
