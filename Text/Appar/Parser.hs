@@ -84,7 +84,7 @@ char :: Input inp => Char -> MkParser inp Char
 char c = satisfy (c ==)
 
 string :: Input inp => String -> MkParser inp String
-string ""     = pure ""
+string []     = pure ""
 string (c:cs) = (:) <$> char c <*> string cs
 
 ----------------------------------------------------------------
