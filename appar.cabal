@@ -6,7 +6,7 @@ License:                BSD3
 License-File:           LICENSE
 Synopsis:               A simple applicative parser
 Description:            A simple applicative parser in Parsec style
-Category:               Network
+Category:               Parsing
 Cabal-Version:          >= 1.6
 Build-Type:             Simple
 library
