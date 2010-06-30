@@ -48,7 +48,7 @@ module Text.Appar.Parser (
   , many
   , pure
   -- ** Internals
-  , MkParser
+  , MkParser(..)
   , Input(..)
   , satisfy
   ) where
@@ -60,7 +60,10 @@ import Data.Char
 
 ----------------------------------------------------------------
 
-data MkParser inp a = P { runParser :: inp -> (Maybe a, inp) }
+data MkParser inp a = P {
+  -- | Getting the internal parser.
+    runParser :: inp -> (Maybe a, inp)
+  }
 
 ----------------------------------------------------------------
 
