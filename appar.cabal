@@ -9,6 +9,7 @@ Description:            A simple applicative parser in Parsec style
 Category:               Parsing
 Cabal-Version:          >= 1.6
 Build-Type:             Simple
+Extra-Source-Files:     README
 library
   if impl(ghc >= 6.12)
     GHC-Options:        -Wall -fno-warn-orphans -fno-warn-unused-do-bind
