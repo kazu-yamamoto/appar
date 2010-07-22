@@ -1,5 +1,3 @@
-{-# LANGUAGE TypeSynonymInstances #-}
-
 {-|
 Simple 'Applicative' parser whose input is 'String'.
 The usage is the same as parsec.
@@ -24,12 +22,6 @@ module Text.Appar.String (
   ) where
 
 import Text.Appar.Parser
-
-instance Input String where
-    car = head
-    cdr = tail
-    isNil = null
-    nil = ""
 
 {-|
   Parser synonym for 'String'.

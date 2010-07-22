@@ -57,6 +57,7 @@ import Control.Applicative
 import Control.Monad
 import Data.ByteString.Lazy.Char8 (ByteString)
 import Data.Char
+import Text.Appar.Input
 
 ----------------------------------------------------------------
 
@@ -64,21 +65,6 @@ data MkParser inp a = P {
   -- | Getting the internal parser.
     runParser :: inp -> (Maybe a, inp)
   }
-
-----------------------------------------------------------------
-
-{-|
-  The class for parser input.
--}
-class Eq inp => Input inp where
-    -- | The head function for input
-    car :: inp -> Char
-    -- | The tail function for input
-    cdr :: inp -> inp
-    -- | The end of input
-    nil :: inp
-    -- | The function to check the end of input
-    isNil :: inp -> Bool
 
 ----------------------------------------------------------------
 
