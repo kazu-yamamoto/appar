@@ -55,7 +55,6 @@ module Text.Appar.Parser (
 
 import Control.Applicative
 import Control.Monad
-import Data.ByteString.Lazy.Char8 (ByteString)
 import Data.Char
 import Text.Appar.Input
 
@@ -97,7 +96,7 @@ instance MonadPlus (MkParser inp) where
 {-|
   Run a parser.
 -}
-parse :: MkParser ByteString a -> ByteString -> Maybe a
+parse :: Input inp => MkParser inp a -> inp -> Maybe a
 parse p bs = fst (runParser p bs)
 
 ----------------------------------------------------------------
