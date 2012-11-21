@@ -11,10 +11,7 @@ Cabal-Version:          >= 1.6
 Build-Type:             Simple
 Extra-Source-Files:     README
 library
-  if impl(ghc >= 6.12)
-    GHC-Options:        -Wall -fno-warn-unused-do-bind
-  else
-    GHC-Options:        -Wall
+  GHC-Options:          -Wall
   Exposed-Modules:      Text.Appar.String
                         Text.Appar.ByteString
                         Text.Appar.LazyByteString
