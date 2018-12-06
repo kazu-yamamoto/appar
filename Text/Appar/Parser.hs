@@ -55,6 +55,7 @@ module Text.Appar.Parser (
 
 import Control.Applicative
 import Control.Monad
+import Control.Monad.Fail
 import Data.Char
 import Text.Appar.Input
 
@@ -83,6 +84,8 @@ instance Monad (MkParser inp) where
     p >>= f  = P $ \bs -> case runParser p bs of
         (Nothing, bs') -> (Nothing, bs')
         (Just a,  bs') -> runParser (f a) bs'
+
+instance MonadFail (MkParser inp) where
     fail _   = P $ \bs -> (Nothing, bs)
 
 instance MonadPlus (MkParser inp) where
