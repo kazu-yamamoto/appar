@@ -72,15 +72,15 @@ instance Functor (MkParser inp) where
     f `fmap` p = return f <*> p
 
 instance Applicative (MkParser inp) where
-    pure  = return
-    (<*>) = ap
+    pure a = P $ \bs -> (Just a, bs)
+    (<*>)  = ap
 
 instance Alternative (MkParser inp) where
     empty = mzero
     (<|>) = mplus
 
 instance Monad (MkParser inp) where
-    return a = P $ \bs -> (Just a, bs)
+    return   = pure
     p >>= f  = P $ \bs -> case runParser p bs of
         (Nothing, bs') -> (Nothing, bs')
         (Just a,  bs') -> runParser (f a) bs'
