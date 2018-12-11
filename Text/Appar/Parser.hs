@@ -55,7 +55,7 @@ module Text.Appar.Parser (
 
 import Control.Applicative
 import Control.Monad
-import Control.Monad.Fail
+import Control.Monad.Fail as Fail
 import Data.Char
 import Text.Appar.Input
 
@@ -84,6 +84,8 @@ instance Monad (MkParser inp) where
     p >>= f  = P $ \bs -> case runParser p bs of
         (Nothing, bs') -> (Nothing, bs')
         (Just a,  bs') -> runParser (f a) bs'
+    -- fixme: GHC 8.x will remove the fail method
+    fail = Fail.fail
 
 instance MonadFail (MkParser inp) where
     fail _   = P $ \bs -> (Nothing, bs)
