@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings, CPP #-}
 
 {-|
 This is subset of Parsec.
@@ -84,8 +84,9 @@ instance Monad (MkParser inp) where
     p >>= f  = P $ \bs -> case runParser p bs of
         (Nothing, bs') -> (Nothing, bs')
         (Just a,  bs') -> runParser (f a) bs'
-    -- fixme: GHC 8.x will remove the fail method
+#if !MIN_VERSION_base(4,13,0)
     fail = Fail.fail
+#endif
 
 instance MonadFail (MkParser inp) where
     fail _   = P $ \bs -> (Nothing, bs)
