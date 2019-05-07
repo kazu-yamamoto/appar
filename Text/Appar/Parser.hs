@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 {-|
@@ -85,7 +86,9 @@ instance Monad (MkParser inp) where
         (Nothing, bs') -> (Nothing, bs')
         (Just a,  bs') -> runParser (f a) bs'
     -- fixme: GHC 8.x will remove the fail method
+#if !MIN_VERSION_base(4,13,0)
     fail = Fail.fail
+#endif
 
 instance MonadFail (MkParser inp) where
     fail _   = P $ \bs -> (Nothing, bs)
