@@ -7,7 +7,7 @@ License-File:           LICENSE
 Synopsis:               A simple applicative parser
 Description:            A simple applicative parser in Parsec style
 Category:               Parsing
-Cabal-Version:          >= 1.6
+Cabal-Version:          >= 1.8
 Build-Type:             Simple
 Extra-Source-Files:     README
 library
