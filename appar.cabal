@@ -24,4 +24,4 @@ library
     Build-Depends:      fail == 4.9.*
 Source-Repository head
   Type:                 git
-  Location:             git://github.com/kazu-yamamoto/appar.git
+  Location:             https://github.com/kazu-yamamoto/appar.git
